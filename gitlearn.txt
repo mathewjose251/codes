@@ -1,0 +1,4 @@
+PR is short for Pull Request. Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before the changes are merged into the repository.
+through this PR you can then ask a more experienced developer to do a CR (code review) on your PR and accept it or not.
+
+eg: git checkout -b learngit
