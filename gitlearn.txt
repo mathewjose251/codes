@@ -2,3 +2,5 @@ PR is short for Pull Request. Pull requests let you tell others about changes yo
 through this PR you can then ask a more experienced developer to do a CR (code review) on your PR and accept it or not.
 
 eg: git checkout -b learngit
+
+I am trying to use it from VsCode
