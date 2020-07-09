@@ -4,3 +4,8 @@ through this PR you can then ask a more experienced developer to do a CR (code r
 eg: git checkout -b learngit
 
 I am trying to use it from VsCode
+=====
+#!/bin/bash
+curl -Gs http://pm01:8080/pdb/query/v4/facts/ec2_metadata --data-urlencode 'pretty=true' \
+    | jq -r '.[] | [ .certname , .value."local-ipv4", .value."instance-type" , .value."instance-id" , .value.placement."availability-zone" ] | @tsv' \
+    |sort|column -t
