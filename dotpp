@@ -5,3 +5,18 @@
       -> anchor { 'tools_final': }
 
   }
+        service { 'app1
+            ensure     => running,
+            enable     => true,
+            start      => "/etc/init.d/app1 ${component}-start",
+            stop       => '/etc/init.d/app1 stopall',
+            restart    => "/etc/init.d/app1 stopall; /etc/init.d/app1 ${component}-start",
+            status     => "(exit $(/etc/init.d/app1 status | grep ${component} | grep -v 'is running' | wc -l) )",
+            hasstatus  => true,
+            hasrestart => false,
+            subscribe  => [
+                File['/opt/appdir/ssl'],
+                File['/etc/opt/appdir/config.pl'],
+                File['/etc/opt/appdir/httpd.conf'],
+            ],
+        }
