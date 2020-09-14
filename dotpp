@@ -1,11 +1,56 @@
 Test the edit file
 --------
+yaml-syn
+
+vm_tools::package_names:
+     - vm-tools
+vmc_tools::vm_deps:
+
+vm_tools::vm_service_name:   'vm-toolsd.service'
+-----------
+
+hiera.yaml
+-----------
+---
+version: 5
+
+defaults:
+  datadir: data
+  data_hash: yaml_data
+
+hierarchy:
+    - name: 'OS clasiisifed Data'
+      paths:
+        - 'os/%{facts.os.family}/%{facts.os.name}/%{facts.os.release.full}.yaml'
+        - 'os/%{facts.os.family}/%{facts.os.name}/%{facts.os.release.major}/%{facts.os.release.minor}.yaml'
+        - 'os/%{facts.os.family}/%{facts.os.name}/%{facts.os.release.major}.yaml'
+        - 'os/%{facts.os.family}/%{facts.os.name}.yaml'
+        - 'os/%{facts.os.family}.yaml
+    - name: 'Common Data'
+      path: 'common.yaml'
+
+
+------------
+
+servicedot.pp
+class <class_name>::service {
 
 
 
+service { 'vm-tools':
+    ensure     => running,
+    enable     => true,
+    start      => 'systemctl start vm_tools',
+    stop       => 'systemctl stop vm_tools',
+    restart    => 'systemctl restart vm_tools',
+    status     => 'systemctl status vm_tools',
+    hasstatus  => true,
+    hasrestart => true,
+    subscribe  => File[$vm_tools_Files]
 
-
-
+  }
+  -------------
+  
 
 
 
