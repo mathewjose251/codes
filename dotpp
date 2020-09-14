@@ -31,7 +31,29 @@ hierarchy:
 
 
 ------------
+hiera lookup model
+---
+class vm_tools::config  {
 
+  $vm_config_dir      = = lookup('vm_tools::vm_config_dir')
+  $package_names                               = lookup('vm_tools::package_names')
+  $vm_service_name                           = lookup('vm_tools::vm_service_name')
+  $vm_config_file         = lookup('vm_tools::vm_config_file')
+  $vm_cert_dir        = lookup('vm_tools::vm_cert_dir')
+  $vm_masters = lookup('vm_tools::vm_masters')
+  $vm_cron           = lookup('vm_tools::vm_cron')
+  $user             = lookup('vm_tools::user')
+  $group             = lookup('vm_tools::group')
+  
+
+  mount { $spool_mount:
+    ensure  => 'mounted',
+    fstype  => 'tmpfs',
+    device  => 'none',
+    options => 'mode=750,size=1024M,uid=root,gid=vm',
+    atboot  => true,
+
+------------
 servicedot.pp
 class <class_name>::service {
 
