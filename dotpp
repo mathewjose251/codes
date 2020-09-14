@@ -1,4 +1,15 @@
- anchor { 'tools_first': }
+Test the edit file
+--------
+
+
+
+
+
+
+
+
+
+anchor { 'tools_first': }
       -> class { 'tools::install': }
       -> class { 'tools::config': }
       -> class { 'tools::service': }
