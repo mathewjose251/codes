@@ -58,6 +58,34 @@ servicedot.pp
 class <class_name>::service {
 
 
+class sym_smg::service {
+
+
+  $status_code = "(exit $(/etc/init.d/mailltest status | egrep -w 'runner|conduit|bmifilter|bmcleaner|bmserver'| grep -v 'is running' | wc -l) )" }
+
+
+
+
+service { 'mailltest':
+    ensure     => running,
+    enable     => true,
+    start      => '/etc/init.d/mailltest start',
+    stop       => '/etc/init.d/mailltest stop',
+    restart    => '/etc/init.d/mailltest restart',
+    #status  => "(exit $(/etc/init.d/mailltest status | egrep "runner|conduit|jlu-controller|bmcleaner|bmserver"| grep -v 'is running' | wc -l) )",
+    #status  => "(exit $(/etc/init.d/mailltest status | egrep -w 'runner|bmserver'| grep -v 'is running' | wc -l) )",
+    status     => $status_code,
+    hasstatus  => true,
+    hasrestart => false,
+    #subscribe  => [
+    #    File['sym_smg::sym_smg_config_file'],
+    #    File['sym_smg::sym_smg_runner_cfg_file'],
+#
+ #   ],
+
+  }
+  }
+
 
 service { 'vm-tools':
     ensure     => running,
